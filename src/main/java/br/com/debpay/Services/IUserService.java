@@ -1,7 +1,7 @@
 package br.com.debpay.Services;
 
-import br.com.debpay.DTO.UserDTO;
-
 public interface IUserService {
-    UserDTO getUser(String login);
+    int login(String login, String password);
+
+    int createUser(String login, String password);
 }

@@ -15,8 +15,8 @@ public class UserDAO implements IUserDAO {
     @Override
     public User getUser(String login) {
         var query =
-            "SELECT * from users " +
-            "WHERE login = ?";
+                "SELECT * from users " +
+                        "WHERE login = ?";
 
         try {
             var stm = database.getConnection().prepareStatement(query);
@@ -33,5 +33,20 @@ public class UserDAO implements IUserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void createUser(String login, String password) {
+        var query = "INSERT INTO users (login, password) VALUES (?, ?)";
+
+        try {
+            var stm = database.getConnection().prepareStatement(query);
+            stm.setString(1, login);
+            stm.setString(2, password);
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            // TODO improve it
+            e.printStackTrace();
+        }
     }
 }

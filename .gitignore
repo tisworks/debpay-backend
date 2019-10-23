@@ -1,3 +1,4 @@
 .idea
 debpay.iml
 /target/
+test.db-journal

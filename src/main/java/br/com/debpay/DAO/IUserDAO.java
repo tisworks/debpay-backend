@@ -4,4 +4,6 @@ import br.com.debpay.Entities.User;
 
 public interface IUserDAO {
     User getUser(String login);
+
+    void createUser(String login, String password);
 }

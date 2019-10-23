@@ -7,6 +7,14 @@ public class UserDTO {
     private String login;
     private String password;
 
+    public static UserDTO converter(User user) {
+        var dto = new UserDTO();
+        dto.id = user.getId();
+        dto.login = user.getLogin();
+        dto.password = user.getPassword();
+        return dto;
+    }
+
     public int getId() {
         return id;
     }
@@ -29,13 +37,5 @@ public class UserDTO {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public static UserDTO converter(User user) {
-        var dto = new UserDTO();
-        dto.id = user.getId();
-        dto.login = user.getLogin();
-        dto.password = user.getPassword();
-        return dto;
     }
 }
