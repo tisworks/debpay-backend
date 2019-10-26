@@ -16,16 +16,19 @@ public class OperationDAO implements IOperationDAO {
     }
 
     @Override
-    public List<Operation> listOperations(Date date) {
+    public List<Operation> listOperations(Date date, int userId) {
 
         var query =
                 "SELECT * from operations " +
-                        "WHERE login = ?";
+                        "INNER JOIN contacts ON operations.contact_id = contacts.id" +
+                        "WHERE operations.due_date = ?" +
+                        "AND contacts.id = ?";
 
         try{
             var returnList = new ArrayList<Operation>();
             var stm = database.getConnection().prepareStatement(query);
             stm.setString(1, date.toString());
+            stm.setInt(2, userId);
             var rs = stm.executeQuery();
             while (rs.next()){
                 var op = new Operation(

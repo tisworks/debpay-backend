@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IOperationDAO {
 
-    List<Operation> listOperations(Date date);
+    List<Operation> listOperations(Date date, int userId);
 }
