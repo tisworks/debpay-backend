@@ -3,7 +3,9 @@ package br.com.debpay.DAO;
 import br.com.debpay.Entities.Operation;
 import br.com.debpay.Infrastructure.SQLDatabase;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +29,7 @@ public class OperationDAO implements IOperationDAO {
         try{
             var returnList = new ArrayList<Operation>();
             var stm = database.getConnection().prepareStatement(query);
-            stm.setString(1, date.toString());
+            stm.setString(1, String.valueOf(new SimpleDateFormat("yyyy-MM-dd").parse(date.toString())));
             stm.setInt(2, userId);
             var rs = stm.executeQuery();
             while (rs.next()){
@@ -44,7 +46,7 @@ public class OperationDAO implements IOperationDAO {
 
             return returnList;
         }
-        catch (SQLException e) {
+        catch (SQLException | ParseException e) {
             // TODO improve it
             e.printStackTrace();
         }

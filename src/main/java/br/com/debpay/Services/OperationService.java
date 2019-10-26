@@ -5,7 +5,7 @@ import br.com.debpay.DTO.OperationDTO;
 import br.com.debpay.Entities.Operation;
 
 import java.util.ArrayList;
-import java.sql.Date;
+import java.util.Date;
 
 public class OperationService implements IOperationService {
 
