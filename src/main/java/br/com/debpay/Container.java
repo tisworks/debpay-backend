@@ -2,6 +2,8 @@ package br.com.debpay;
 
 import br.com.debpay.DAO.UserDAO;
 import br.com.debpay.Infrastructure.SQLDatabase;
+import br.com.debpay.Services.IOperationService;
+import br.com.debpay.Services.IUserService;
 import br.com.debpay.Services.UserService;
 
 public class Container {
@@ -12,7 +14,11 @@ public class Container {
     private Container() {
     }
 
-    public static UserService getUserService() {
+    public static IUserService getUserService() {
         return new UserService(new UserDAO(Container.SQLite), salt);
+    }
+
+    public static IOperationService getOperationService() {
+        return null;
     }
 }
