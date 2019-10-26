@@ -1,5 +1,8 @@
 package br.com.debpay.DTO;
 
+import br.com.debpay.Entities.Operation;
+import br.com.debpay.Entities.OperationType;
+
 import java.util.Date;
 
 public class OperationDTO {
@@ -66,4 +69,17 @@ public class OperationDTO {
     private int installmentsLeft;
     private float value;
     private int contactID;
+
+    public  static OperationDTO converter(Operation op){
+        var dto = new OperationDTO();
+        dto.id = op.getId();
+        dto.dueDate = op.getDueDate();
+        dto.description = op.getDescription();
+        dto.contactID = op.getContactId();
+        dto.installmentsLeft = op.getInstallmentsLeft();
+        dto.value = op.getValue();
+        dto.type = op.getType() == OperationType.CREDITO ? 1 : 0;
+
+        return dto;
+    }
 }

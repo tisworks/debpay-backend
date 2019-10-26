@@ -1,11 +1,11 @@
 package br.com.debpay.Services;
 
 import br.com.debpay.DAO.IOperationDAO;
-import br.com.debpay.DAO.OperationDAO;
 import br.com.debpay.DTO.OperationDTO;
+import br.com.debpay.Entities.Operation;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class OperationService implements IOperationService {
 
@@ -17,6 +17,12 @@ public class OperationService implements IOperationService {
 
     @Override
     public ArrayList<OperationDTO> listOperations(int id, Date dueDate) {
-        return null;
+        var operations = this.dao.listOperations(dueDate, id);
+        var returnList = new ArrayList<OperationDTO>();
+        for(Operation op : operations){
+            returnList.add(OperationDTO.converter(op));
+        }
+
+        return returnList;
     }
 }
