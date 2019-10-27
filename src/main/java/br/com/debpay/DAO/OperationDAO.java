@@ -3,11 +3,7 @@ package br.com.debpay.DAO;
 import br.com.debpay.Entities.Operation;
 import br.com.debpay.Infrastructure.SQLDatabase;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OperationDAO implements IOperationDAO {
@@ -18,6 +14,51 @@ public class OperationDAO implements IOperationDAO {
     }
 
     @Override
+    public Operation get(int id) {
+        /*var query = "SELECT * from operations WHERE id = ?";
+
+        try {
+            var stm = database.getConnection().prepareStatement(query);
+            stm.setInt(1, id);
+            var rs = stm.executeQuery();
+            if (rs.next()) {
+                return new Operation(
+                        rs.getInt("id"),
+                        rs.getString("login"),
+                        rs.getString("password")
+                );
+            }
+        } catch (SQLException e) {
+            // TODO improve it
+            e.printStackTrace();
+        }
+        return null;*/
+        return null;
+    }
+
+    @Override
+    public List<Operation> getAll(int userId) {
+        return null;
+    }
+
+    @Override
+    public void save(Operation o) {
+
+    }
+
+    @Override
+    public void update(Operation o) {
+
+    }
+
+    @Override
+    public void delete(int id) {
+
+    }
+
+
+
+    /*@Override
     public List<Operation> listOperations(Date date, int userId) {
 
         var query =
@@ -52,5 +93,5 @@ public class OperationDAO implements IOperationDAO {
         }
 
         return null;
-    }
+    }*/
 }

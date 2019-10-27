@@ -6,20 +6,20 @@ public class Operation {
 
     private int id;
     private String description;
+    private OperationType type;
     private Date dueDate;
     private int installmentsLeft;
     private float value;
-    private int contactId;
-    private OperationType type;
+    private Contact contact;
 
-    public Operation(int id, String description, Date dueDate, int installmentsLeft, float value, int contactId, int type) {
-        this.id = id;
-        this.description = description;
-        this.dueDate = dueDate;
-        this.installmentsLeft = installmentsLeft;
-        this.value = value;
-        this.contactId = contactId;
-        this.type= type == 1 ? OperationType.CREDITO : OperationType.DEBITO;
+    public Operation(int id, String description, OperationType type, Date dueDate, int installmentsLeft, float value, Contact contact) {
+        setId(id);
+        setDescription(description);
+        setType(type);
+        setDueDate(dueDate);
+        setInstallmentsLeft(installmentsLeft);
+        setValue(value);
+        setContact(contact);
     }
 
     public int getId() {
@@ -36,6 +36,14 @@ public class Operation {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public OperationType getType() {
+        return type;
+    }
+
+    public void setType(OperationType type) {
+        this.type = type;
     }
 
     public Date getDueDate() {
@@ -62,19 +70,11 @@ public class Operation {
         this.value = value;
     }
 
-    public int getContactId() {
-        return contactId;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
-    }
-
-    public OperationType getType() {
-        return type;
-    }
-
-    public void setType(OperationType type) {
-        this.type = type;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

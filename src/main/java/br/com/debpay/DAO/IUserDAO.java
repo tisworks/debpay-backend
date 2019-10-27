@@ -2,8 +2,13 @@ package br.com.debpay.DAO;
 
 import br.com.debpay.Entities.User;
 
-public interface IUserDAO {
-    User getUser(String login);
+import java.util.List;
 
-    void createUser(String login, String password);
+public interface IUserDAO {
+    User get(int id);
+    User get(String login);
+    List<User> getAll();
+    void save(User u);
+    void update(User u);
+    void delete(int id);
 }
