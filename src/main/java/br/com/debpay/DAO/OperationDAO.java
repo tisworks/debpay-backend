@@ -6,9 +6,11 @@ import br.com.debpay.Entities.OperationType;
 import br.com.debpay.Entities.User;
 import br.com.debpay.Infrastructure.SQLDatabase;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class OperationDAO implements IOperationDAO {
@@ -53,13 +55,18 @@ public class OperationDAO implements IOperationDAO {
     }
 
     @Override
-    public List<Operation> getAll(int userId) {
+    public List<Operation> getAll(int userId, Date date) {
         var query = "SELECT * from operations WHERE user_id = ?";
         var result = new ArrayList<Operation>();
+
+        if(date != null)
+            query += " AND due_date = ?";
 
         try {
             var stm = database.getConnection().prepareStatement(query);
             stm.setInt(1, userId);
+            if(date != null)
+                stm.setString(2, sdt.format(date));
             var rs = stm.executeQuery();
             while (rs.next()) {
                 var user = new User();
@@ -87,22 +94,27 @@ public class OperationDAO implements IOperationDAO {
         return result;
     }
 
+    private PreparedStatement setOperationRow(String query, Operation o) throws Exception {
+        var stm = database.getConnection().prepareStatement(query);
+        stm.setString(1, o.getDescription());
+        stm.setInt(2, o.getType().getValue());
+        stm.setString(3, sdt.format(o.getDueDate()));
+        stm.setInt(4, o.getInstallmentsLeft());
+        stm.setFloat(5, o.getValue());
+        stm.setInt(6, o.getContact().getId());
+        stm.setInt(7, o.getContact().getUser().getId());
+        return stm;
+    }
+
     @Override
     public void save(Operation o) {
         var query = "INSERT INTO operations (description, type, due_date, installments_left, value, contact_id, user_id)" +
                 " VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            var stm = database.getConnection().prepareStatement(query);
-            stm.setString(1, o.getDescription());
-            stm.setInt(2, o.getType().getValue());
-            stm.setString(3, sdt.format(o.getDueDate()));
-            stm.setInt(4, o.getInstallmentsLeft());
-            stm.setFloat(5, o.getValue());
-            stm.setInt(6, o.getContact().getId());
-            stm.setInt(7, o.getContact().getUser().getId());
+            var stm = setOperationRow(query, o);
             stm.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO improve it
             e.printStackTrace();
         }
@@ -114,17 +126,10 @@ public class OperationDAO implements IOperationDAO {
                 "value = ?, contact_id = ?, user_id = ? WHERE id = ?";
 
         try {
-            var stm = database.getConnection().prepareStatement(query);
-            stm.setString(1, o.getDescription());
-            stm.setInt(2, o.getType().getValue());
-            stm.setString(3, sdt.format(o.getDueDate()));
-            stm.setInt(4, o.getInstallmentsLeft());
-            stm.setFloat(5, o.getValue());
-            stm.setInt(6, o.getContact().getId());
-            stm.setInt(7, o.getContact().getUser().getId());
+            var stm = setOperationRow(query, o);
             stm.setInt(8, o.getId());
             stm.executeUpdate();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             // TODO improve it
             e.printStackTrace();
         }
@@ -144,41 +149,4 @@ public class OperationDAO implements IOperationDAO {
             e.printStackTrace();
         }
     }
-
-    /*@Override
-    public List<Operation> listOperations(Date date, int userId) {
-
-        var query =
-                "SELECT * from operations " +
-                        "INNER JOIN contacts ON operations.contact_id = contacts.id" +
-                        "WHERE operations.due_date = ?" +
-                        "AND contacts.id = ?";
-
-        try{
-            var returnList = new ArrayList<Operation>();
-            var stm = database.getConnection().prepareStatement(query);
-            stm.setString(1, String.valueOf(new SimpleDateFormat("yyyy-MM-dd").parse(date.toString())));
-            stm.setInt(2, userId);
-            var rs = stm.executeQuery();
-            while (rs.next()){
-                var op = new Operation(
-                    rs.getInt("id"),
-                    rs.getString("description"),
-                    rs.getDate("dueDate"),
-                    rs.getInt("installmentsLeft"),
-                    rs.getFloat("value"),
-                    rs.getInt("contactId"),
-                    rs.getInt("type"));
-                returnList.add(op);
-            }
-
-            return returnList;
-        }
-        catch (SQLException | ParseException e) {
-            // TODO improve it
-            e.printStackTrace();
-        }
-
-        return null;
-    }*/
 }
