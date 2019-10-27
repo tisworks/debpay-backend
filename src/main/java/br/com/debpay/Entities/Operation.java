@@ -22,6 +22,8 @@ public class Operation {
         setContact(contact);
     }
 
+    public Operation() {}
+
     public int getId() {
         return id;
     }

@@ -70,7 +70,7 @@ public class OperationDTO {
     private float value;
     private int contactID;
 
-    public  static OperationDTO converter(Operation op){
+    /*public  static OperationDTO converter(Operation op){
         var dto = new OperationDTO();
         dto.id = op.getId();
         dto.dueDate = op.getDueDate();
@@ -81,5 +81,5 @@ public class OperationDTO {
         dto.type = op.getType() == OperationType.CREDITO ? 1 : 0;
 
         return dto;
-    }
+    }*/
 }
