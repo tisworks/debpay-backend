@@ -7,8 +7,12 @@ import java.util.List;
 
 public interface IOperationDAO {
     Operation get(int id);
+
     List<Operation> getAll(int userId, Date date);
+
     void save(Operation o);
+
     void update(Operation o);
+
     void delete(int id);
 }

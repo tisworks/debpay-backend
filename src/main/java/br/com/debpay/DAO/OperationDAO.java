@@ -59,13 +59,13 @@ public class OperationDAO implements IOperationDAO {
         var query = "SELECT * from operations WHERE user_id = ?";
         var result = new ArrayList<Operation>();
 
-        if(date != null)
+        if (date != null)
             query += " AND due_date = ?";
 
         try {
             var stm = database.getConnection().prepareStatement(query);
             stm.setInt(1, userId);
-            if(date != null)
+            if (date != null)
                 stm.setString(2, sdt.format(date));
             var rs = stm.executeQuery();
             while (rs.next()) {
