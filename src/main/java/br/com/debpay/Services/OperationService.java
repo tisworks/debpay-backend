@@ -17,7 +17,7 @@ public class OperationService implements IOperationService {
 
     @Override
     public ArrayList<OperationDTO> listOperations(int id, Date dueDate) {
-        var operations = this.dao.listOperations(dueDate, id);
+        var operations = this.dao.getAll(id,dueDate);
         var returnList = new ArrayList<OperationDTO>();
         for(Operation op : operations){
             returnList.add(OperationDTO.converter(op));

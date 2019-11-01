@@ -11,6 +11,11 @@ public class User {
         setPassword(password);
     }
 
+    public User(String login, String password) {
+        setLogin(login);
+        setPassword(password);
+    }
+
     public User() {}
 
     public int getId() {

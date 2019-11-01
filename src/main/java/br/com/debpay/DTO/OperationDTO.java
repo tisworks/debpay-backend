@@ -70,16 +70,16 @@ public class OperationDTO {
     private float value;
     private int contactID;
 
-    /*public  static OperationDTO converter(Operation op){
+    public  static OperationDTO converter(Operation op){
         var dto = new OperationDTO();
         dto.id = op.getId();
         dto.dueDate = op.getDueDate();
         dto.description = op.getDescription();
-        dto.contactID = op.getContactId();
+        dto.contactID = op.getContact().getId();
         dto.installmentsLeft = op.getInstallmentsLeft();
         dto.value = op.getValue();
-        dto.type = op.getType() == OperationType.CREDITO ? 1 : 0;
+        dto.type = op.getType().getValue();
 
         return dto;
-    }*/
+    }
 }
