@@ -3,7 +3,6 @@ package br.com.debpay.Controllers;
 import br.com.debpay.Container;
 import com.google.gson.Gson;
 
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

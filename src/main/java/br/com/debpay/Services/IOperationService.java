@@ -2,9 +2,10 @@ package br.com.debpay.Services;
 
 import br.com.debpay.DTO.OperationDTO;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public interface IOperationService {
-    ArrayList<OperationDTO> listOperations(int id, Date dueDate);
+    int createOperation(OperationDTO dto);
+    List<OperationDTO> listOperations(int id, Date dueDate);
 }

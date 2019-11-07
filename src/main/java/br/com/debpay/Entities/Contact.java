@@ -19,7 +19,8 @@ public class Contact {
         setBankAccount(bankAccount);
     }
 
-    public Contact() {}
+    public Contact() {
+    }
 
     public int getId() {
         return id;

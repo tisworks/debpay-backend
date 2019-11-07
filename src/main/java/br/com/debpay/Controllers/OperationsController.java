@@ -12,7 +12,17 @@ import java.text.SimpleDateFormat;
 @Path("operation")
 public class OperationsController {
 
-   @GET
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createOperation(String input) {
+        var gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        var operation = gson.fromJson(input, JSONInput.Operation.class);
+
+
+        return null;
+    }
+
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response listOperation(@QueryParam("id") int id, @QueryParam("due_date") String dueDate) {
         // TODO we should validate the parameters
@@ -24,7 +34,7 @@ public class OperationsController {
                     .status(Response.Status.OK)
                     .entity(result)
                     .build();
-        } catch(Exception e) {
+        } catch (Exception e) {
             // TODO
             return Response
                     .status(Response.Status.INTERNAL_SERVER_ERROR)
