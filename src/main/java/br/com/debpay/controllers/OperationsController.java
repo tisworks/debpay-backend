@@ -57,7 +57,7 @@ public class OperationsController {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response listOperation(
-      @QueryParam("id") int userID, @QueryParam("due_date") String dueDate) {
+      @QueryParam("userID") int userID, @QueryParam("due_date") String dueDate) {
     try {
       var filter = new OperationFilterDTO();
 

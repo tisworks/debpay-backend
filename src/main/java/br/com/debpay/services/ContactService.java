@@ -5,6 +5,7 @@ import br.com.debpay.dto.ContactDTO;
 import br.com.debpay.entities.Contact;
 import br.com.debpay.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactService implements IContactService {
@@ -34,6 +35,24 @@ public class ContactService implements IContactService {
 
   @Override
   public List<ContactDTO> listContact(int userID) {
-    return null;
+    var result = new ArrayList<ContactDTO>();
+    var contacts = dao.getAll(userID);
+
+    for(var c : contacts) {
+      result.add(contactToDTO(c));
+    }
+    return result;
+  }
+
+  private ContactDTO contactToDTO(Contact c) {
+    var dto = new ContactDTO();
+    dto.setId(c.getId());
+    dto.setUserID(c.getUser().getId());
+    dto.setName(c.getName());
+    dto.setCpf(c.getCpf());
+    dto.setBankCode(c.getBankCode());
+    dto.setBankAgency(c.getBankAgency());
+    dto.setBankAccount(c.getBankAccount());
+    return dto;
   }
 }
