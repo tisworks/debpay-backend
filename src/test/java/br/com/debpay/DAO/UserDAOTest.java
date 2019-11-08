@@ -1,7 +1,8 @@
 package br.com.debpay.DAO;
 
-import br.com.debpay.Entities.User;
-import br.com.debpay.Infrastructure.SQLDatabase;
+import br.com.debpay.entities.User;
+import br.com.debpay.infrastructure.SQLDatabase;
+import br.com.debpay.dao.UserDAO;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

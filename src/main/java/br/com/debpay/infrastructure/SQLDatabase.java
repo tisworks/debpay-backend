@@ -1,4 +1,4 @@
-package br.com.debpay.Infrastructure;
+package br.com.debpay.infrastructure;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

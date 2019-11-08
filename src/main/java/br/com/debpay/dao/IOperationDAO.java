@@ -1,6 +1,6 @@
-package br.com.debpay.DAO;
+package br.com.debpay.dao;
 
-import br.com.debpay.Entities.Operation;
+import br.com.debpay.entities.Operation;
 
 import java.util.Date;
 import java.util.List;

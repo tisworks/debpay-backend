@@ -1,4 +1,4 @@
-package br.com.debpay.Entities;
+package br.com.debpay.entities;
 
 public class Contact {
     private int id;

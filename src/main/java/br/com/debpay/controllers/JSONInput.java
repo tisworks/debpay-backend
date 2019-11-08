@@ -1,14 +1,14 @@
-package br.com.debpay.Controllers;
+package br.com.debpay.controllers;
 
 import java.util.Date;
 
 class JSONInput {
-    class User {
+    static class User {
         String login;
         String password;
     }
 
-    class Operation {
+    static class Operation {
         String description;
         Date dueDate;
         int operationType;

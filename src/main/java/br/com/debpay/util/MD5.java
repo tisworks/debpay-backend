@@ -1,4 +1,4 @@
-package br.com.debpay.Util;
+package br.com.debpay.util;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;

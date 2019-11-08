@@ -1,17 +1,29 @@
-package br.com.debpay.DTO;
-
-import br.com.debpay.Entities.Operation;
+package br.com.debpay.entities;
 
 import java.util.Date;
 
-public class OperationDTO {
+public class Operation {
+
     private int id;
     private String description;
-    private int type;
+    private OperationType type;
     private Date dueDate;
     private int installmentsLeft;
     private float value;
-    private int contactID;
+    private Contact contact;
+
+    public Operation(int id, String description, OperationType type, Date dueDate, int installmentsLeft, float value, Contact contact) {
+        setId(id);
+        setDescription(description);
+        setType(type);
+        setDueDate(dueDate);
+        setInstallmentsLeft(installmentsLeft);
+        setValue(value);
+        setContact(contact);
+    }
+
+    public Operation() {
+    }
 
     public int getId() {
         return id;
@@ -29,11 +41,11 @@ public class OperationDTO {
         this.description = description;
     }
 
-    public int getType() {
+    public OperationType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(OperationType type) {
         this.type = type;
     }
 
@@ -61,24 +73,11 @@ public class OperationDTO {
         this.value = value;
     }
 
-    public int getContactID() {
-        return contactID;
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContactID(int contactID) {
-        this.contactID = contactID;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
-
-    public  static OperationDTO converter(Operation op){
-        var dto = new OperationDTO();
-        dto.id = op.getId();
-        dto.dueDate = op.getDueDate();
-        dto.description = op.getDescription();
-        dto.contactID = op.getContact().getId();
-        dto.installmentsLeft = op.getInstallmentsLeft();
-        dto.value = op.getValue();
-        dto.type = op.getType().getValue();
-
-        return dto;
-    }` `
 }

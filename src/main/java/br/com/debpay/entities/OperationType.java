@@ -1,4 +1,4 @@
-package br.com.debpay.Entities;
+package br.com.debpay.entities;
 
 import java.util.HashMap;
 import java.util.Map;

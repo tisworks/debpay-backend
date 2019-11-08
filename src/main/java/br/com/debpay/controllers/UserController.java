@@ -1,4 +1,4 @@
-package br.com.debpay.Controllers;
+package br.com.debpay.controllers;
 
 import br.com.debpay.Container;
 import com.google.gson.Gson;

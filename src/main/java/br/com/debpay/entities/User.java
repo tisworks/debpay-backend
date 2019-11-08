@@ -1,4 +1,4 @@
-package br.com.debpay.Entities;
+package br.com.debpay.entities;
 
 public class User {
     private int id;
@@ -16,7 +16,8 @@ public class User {
         setPassword(password);
     }
 
-    public User() {}
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -26,7 +27,9 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() { return login; }
+    public String getLogin() {
+        return login;
+    }
 
     public void setLogin(String login) {
         this.login = login;

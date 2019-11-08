@@ -1,6 +1,6 @@
-package br.com.debpay.DTO;
+package br.com.debpay.dto;
 
-import br.com.debpay.Entities.User;
+import br.com.debpay.entities.User;
 
 public class UserDTO {
     private int id;

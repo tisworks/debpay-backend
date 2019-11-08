@@ -1,8 +1,8 @@
-package br.com.debpay.Services;
+package br.com.debpay.services;
 
-import br.com.debpay.DAO.IUserDAO;
-import br.com.debpay.Entities.User;
-import br.com.debpay.Util.MD5;
+import br.com.debpay.dao.IUserDAO;
+import br.com.debpay.entities.User;
+import br.com.debpay.util.MD5;
 
 public class UserService implements IUserService {
     private final IUserDAO dao;

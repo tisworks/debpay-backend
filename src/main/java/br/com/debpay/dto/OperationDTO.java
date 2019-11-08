@@ -1,29 +1,17 @@
-package br.com.debpay.Entities;
+package br.com.debpay.dto;
+
+import br.com.debpay.entities.OperationType;
 
 import java.util.Date;
 
-public class Operation {
-
+public class OperationDTO {
     private int id;
     private String description;
     private OperationType type;
     private Date dueDate;
     private int installmentsLeft;
     private float value;
-    private Contact contact;
-
-    public Operation(int id, String description, OperationType type, Date dueDate, int installmentsLeft, float value, Contact contact) {
-        setId(id);
-        setDescription(description);
-        setType(type);
-        setDueDate(dueDate);
-        setInstallmentsLeft(installmentsLeft);
-        setValue(value);
-        setContact(contact);
-    }
-
-    public Operation() {
-    }
+    private int contactID;
 
     public int getId() {
         return id;
@@ -73,11 +61,11 @@ public class Operation {
         this.value = value;
     }
 
-    public Contact getContact() {
-        return contact;
+    public int getContactID() {
+        return contactID;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setContactID(int contactID) {
+        this.contactID = contactID;
     }
 }
