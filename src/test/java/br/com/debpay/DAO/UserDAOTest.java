@@ -1,12 +1,13 @@
 package br.com.debpay.DAO;
 
-import br.com.debpay.Entities.User;
-import br.com.debpay.Infrastructure.SQLDatabase;
-import com.google.gson.internal.$Gson$Preconditions;
+import br.com.debpay.entities.User;
+import br.com.debpay.infrastructure.SQLDatabase;
+import br.com.debpay.dao.UserDAO;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Assertions;
+
 import java.sql.SQLException;
 
 class UserDAOTest {
@@ -43,7 +44,7 @@ class UserDAOTest {
         user1 = uDAO.get("test@email.com");
         boolean cond = false;
 
-        if(user.getId() == 12345 && user.getLogin().compareTo("test@email.com") == 0 && user.getPassword().compareTo("12345") == 0 && user1.getId() == 12345 && user1.getLogin().compareTo("test@email.com") == 0 && user1.getPassword().compareTo("12345") == 0)
+        if (user.getId() == 12345 && user.getLogin().compareTo("test@email.com") == 0 && user.getPassword().compareTo("12345") == 0 && user1.getId() == 12345 && user1.getLogin().compareTo("test@email.com") == 0 && user1.getPassword().compareTo("12345") == 0)
             cond = true;
 
         Assertions.assertTrue(cond);
@@ -61,7 +62,7 @@ class UserDAOTest {
         user.setPassword("password");
         uDAO.save(user);
         boolean cond = false;
-        if(uDAO.get("teste").getLogin().compareTo("teste") == 0)
+        if (uDAO.get("teste").getLogin().compareTo("teste") == 0)
             cond = true;
 
         Assertions.assertTrue(cond);
@@ -73,7 +74,7 @@ class UserDAOTest {
         user.setLogin("teste");
         uDAO.update(user);
         boolean cond = false;
-        if(uDAO.get(12345).getLogin().compareTo("teste") == 0)
+        if (uDAO.get(12345).getLogin().compareTo("teste") == 0)
             cond = true;
 
         Assertions.assertTrue(cond);
@@ -83,7 +84,7 @@ class UserDAOTest {
     void delete() {
         uDAO.delete(12345);
         boolean cond = false;
-        if(uDAO.get(12345) == null)
+        if (uDAO.get(12345) == null)
             cond = true;
 
         Assertions.assertTrue(cond);

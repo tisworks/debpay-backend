@@ -1,4 +1,4 @@
-package br.com.debpay.Entities;
+package br.com.debpay.entities;
 
 import java.util.Date;
 
@@ -22,7 +22,8 @@ public class Operation {
         setContact(contact);
     }
 
-    public Operation() {}
+    public Operation() {
+    }
 
     public int getId() {
         return id;

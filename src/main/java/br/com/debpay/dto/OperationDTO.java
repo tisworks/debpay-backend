@@ -1,11 +1,19 @@
-package br.com.debpay.DTO;
+package br.com.debpay.dto;
 
-import br.com.debpay.Entities.Operation;
-import br.com.debpay.Entities.OperationType;
+import br.com.debpay.entities.OperationType;
 
 import java.util.Date;
 
 public class OperationDTO {
+    private int id;
+    private String description;
+    private OperationType type;
+    private Date dueDate;
+    private int installmentsLeft;
+    private float value;
+    private int contactID;
+    private int userID;
+
     public int getId() {
         return id;
     }
@@ -22,11 +30,11 @@ public class OperationDTO {
         this.description = description;
     }
 
-    public int getType() {
+    public OperationType getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(OperationType type) {
         this.type = type;
     }
 
@@ -62,24 +70,7 @@ public class OperationDTO {
         this.contactID = contactID;
     }
 
-    private int id;
-    private String description;
-    private int type;
-    private Date dueDate;
-    private int installmentsLeft;
-    private float value;
-    private int contactID;
+    public int getUserID() { return userID; }
 
-    public  static OperationDTO converter(Operation op){
-        var dto = new OperationDTO();
-        dto.id = op.getId();
-        dto.dueDate = op.getDueDate();
-        dto.description = op.getDescription();
-        dto.contactID = op.getContact().getId();
-        dto.installmentsLeft = op.getInstallmentsLeft();
-        dto.value = op.getValue();
-        dto.type = op.getType().getValue();
-
-        return dto;
-    }
+    public void setUserID(int userID) { this.userID = userID; }
 }

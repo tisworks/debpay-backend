@@ -33,6 +33,18 @@ public class Main {
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }
 
+    /**
+     * Main method.
+     *
+     * @param args
+     * @throws IOException
+     */
+    public static void main(String[] args) throws IOException {
+        final HttpServer server = startServer();
+        System.in.read();
+        server.stop();
+    }
+
     /* Used for tests purposes only - Should be disabled or better implemented on the future*/
     @Provider
     public static class CORSFilter implements ContainerResponseFilter {
@@ -47,18 +59,6 @@ public class Main {
             response.getHeaders().add("Access-Control-Allow-Methods",
                     "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         }
-    }
-
-    /**
-     * Main method.
-     *
-     * @param args
-     * @throws IOException
-     */
-    public static void main(String[] args) throws IOException {
-        final HttpServer server = startServer();
-        System.in.read();
-        server.stop();
     }
 }
 

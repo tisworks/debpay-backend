@@ -1,4 +1,4 @@
-package br.com.debpay.Entities;
+package br.com.debpay.entities;
 
 public class Contact {
     private int id;
@@ -19,7 +19,8 @@ public class Contact {
         setBankAccount(bankAccount);
     }
 
-    public Contact() {}
+    public Contact() {
+    }
 
     public int getId() {
         return id;

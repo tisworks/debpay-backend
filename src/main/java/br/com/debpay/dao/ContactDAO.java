@@ -1,8 +1,8 @@
-package br.com.debpay.DAO;
+package br.com.debpay.dao;
 
-import br.com.debpay.Entities.Contact;
-import br.com.debpay.Entities.User;
-import br.com.debpay.Infrastructure.SQLDatabase;
+import br.com.debpay.entities.Contact;
+import br.com.debpay.entities.User;
+import br.com.debpay.infrastructure.SQLDatabase;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

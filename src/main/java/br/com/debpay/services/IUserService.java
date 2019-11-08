@@ -1,4 +1,4 @@
-package br.com.debpay.Services;
+package br.com.debpay.services;
 
 public interface IUserService {
     int login(String login, String password);
