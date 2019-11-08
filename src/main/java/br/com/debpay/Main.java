@@ -23,7 +23,7 @@ public class Main {
    */
   static HttpServer startServer() {
     // create a resource config that scans for JAX-RS resources and providers
-    final ResourceConfig rc = new ResourceConfig().packages("br.com.debpay.Controllers");
+    final ResourceConfig rc = new ResourceConfig().packages("br.com.debpay.controllers");
     rc.register(new CORSFilter());
 
     // create and start a new instance of grizzly http server
