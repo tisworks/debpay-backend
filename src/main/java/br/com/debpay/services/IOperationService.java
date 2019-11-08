@@ -6,7 +6,7 @@ import br.com.debpay.dto.OperationFilterDTO;
 import java.util.List;
 
 public interface IOperationService {
-    void createOperation(OperationDTO dto);
+  void createOperation(OperationDTO dto);
 
-    List<OperationDTO> listOperations(OperationFilterDTO dto);
+  List<OperationDTO> listOperations(OperationFilterDTO dto);
 }

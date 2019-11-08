@@ -3,39 +3,39 @@ package br.com.debpay.dto;
 import br.com.debpay.entities.User;
 
 public class UserDTO {
-    private int id;
-    private String login;
-    private String password;
+  private int id;
+  private String login;
+  private String password;
 
-    public static UserDTO converter(User user) {
-        var dto = new UserDTO();
-        dto.id = user.getId();
-        dto.login = user.getLogin();
-        dto.password = user.getPassword();
-        return dto;
-    }
+  public static UserDTO converter(User user) {
+    var dto = new UserDTO();
+    dto.id = user.getId();
+    dto.login = user.getLogin();
+    dto.password = user.getPassword();
+    return dto;
+  }
 
-    public int getId() {
-        return id;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public String getLogin() {
-        return login;
-    }
+  public String getLogin() {
+    return login;
+  }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+  public void setLogin(String login) {
+    this.login = login;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }
