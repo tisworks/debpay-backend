@@ -1,32 +1,13 @@
-package br.com.debpay.entities;
+package br.com.debpay.dto;
 
-public class Contact {
+public class ContactDTO {
   private int id;
-  private User user;
+  private int userID;
   private String name;
   private String cpf;
   private String bankCode;
   private String bankAgency;
   private String bankAccount;
-
-  public Contact(
-      int id,
-      User user,
-      String name,
-      String cpf,
-      String bankCode,
-      String bankAgency,
-      String bankAccount) {
-    setId(id);
-    setUser(user);
-    setName(name);
-    setCpf(cpf);
-    setBankCode(bankCode);
-    setBankAgency(bankAgency);
-    setBankAccount(bankAccount);
-  }
-
-  public Contact() {}
 
   public int getId() {
     return id;
@@ -36,12 +17,12 @@ public class Contact {
     this.id = id;
   }
 
-  public User getUser() {
-    return user;
+  public int getUserID() {
+    return userID;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUserID(int userID) {
+    this.userID = userID;
   }
 
   public String getName() {

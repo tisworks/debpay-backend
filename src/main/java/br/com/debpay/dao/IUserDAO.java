@@ -5,15 +5,15 @@ import br.com.debpay.entities.User;
 import java.util.List;
 
 public interface IUserDAO {
-    User get(int id);
+  User get(int id);
 
-    User get(String login);
+  User get(String login);
 
-    List<User> getAll();
+  List<User> getAll();
 
-    void save(User u);
+  void save(User u);
 
-    void update(User u);
+  void update(User u);
 
-    void delete(int id);
+  void delete(int id);
 }
