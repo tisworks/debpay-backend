@@ -31,6 +31,7 @@ public class OperationsController {
 
             if (OperationType.valueOf(operation.operationType) == null ||
                     operation.contactID < 1 ||
+                    operation.userID < 1 ||
                     operation.installmentsLeft < 0 ||
                     operation.value < 0) {
 
@@ -46,6 +47,7 @@ public class OperationsController {
             dto.setInstallmentsLeft(operation.installmentsLeft);
             dto.setValue(operation.value);
             dto.setContactID(operation.contactID);
+            dto.setUserID(operation.userID);
 
             var service = Container.getOperationService();
             service.createOperation(dto);

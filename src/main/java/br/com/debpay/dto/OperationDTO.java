@@ -12,6 +12,7 @@ public class OperationDTO {
     private int installmentsLeft;
     private float value;
     private int contactID;
+    private int userID;
 
     public int getId() {
         return id;
@@ -68,4 +69,8 @@ public class OperationDTO {
     public void setContactID(int contactID) {
         this.contactID = contactID;
     }
+
+    public int getUserID() { return userID; }
+
+    public void setUserID(int userID) { this.userID = userID; }
 }

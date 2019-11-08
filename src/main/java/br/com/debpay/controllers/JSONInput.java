@@ -13,6 +13,7 @@ class JSONInput {
         Date dueDate;
         int operationType;
         int contactID;
+        int userID;
         int installmentsLeft;
         float value;
     }

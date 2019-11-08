@@ -6,6 +6,7 @@ import br.com.debpay.dto.OperationFilterDTO;
 import br.com.debpay.entities.Contact;
 import br.com.debpay.entities.Operation;
 import br.com.debpay.entities.OperationType;
+import br.com.debpay.entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,11 @@ public class OperationService implements IOperationService {
 
         var contact = new Contact();
         contact.setId(dto.getContactID());
+
+        var user = new User();
+        user.setId(dto.getUserID());
+
+        contact.setUser(user);
         op.setContact(contact);
 
         dao.save(op);
