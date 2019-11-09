@@ -2,6 +2,7 @@ package br.com.debpay;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.container.ContainerRequestContext;
@@ -24,6 +25,7 @@ public class Main {
   static HttpServer startServer() {
     // create a resource config that scans for JAX-RS resources and providers
     final ResourceConfig rc = new ResourceConfig().packages("br.com.debpay.controllers");
+    rc.register(JacksonFeature.class);
     rc.register(new CORSFilter());
 
     // create and start a new instance of grizzly http server
@@ -38,6 +40,7 @@ public class Main {
    * @throws IOException
    */
   public static void main(String[] args) throws IOException {
+    Container.setDataBasePath(args[0]);
     final HttpServer server = startServer();
     System.in.read();
     server.stop();

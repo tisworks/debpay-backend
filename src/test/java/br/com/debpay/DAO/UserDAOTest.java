@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.SQLException;
 
 class UserDAOTest {
-    SQLDatabase database;
+   /* SQLDatabase database;
     UserDAO uDAO = new UserDAO(database);
 
     @BeforeEach
@@ -88,5 +88,5 @@ class UserDAOTest {
             cond = true;
 
         Assertions.assertTrue(cond);
-    }
+    }*/
 }
