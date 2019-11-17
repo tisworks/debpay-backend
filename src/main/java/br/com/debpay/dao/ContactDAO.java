@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ContactDAO implements IContactDAO {
   private final SQLDatabase database;
@@ -16,62 +17,42 @@ public class ContactDAO implements IContactDAO {
     this.database = database;
   }
 
-  @Override
-  public Contact get(int id) {
-    var query = "SELECT * from contacts";
+  // Method created to work with streams instead of query filter
+  private List<Contact> getContacts() {
+    var contacts = new ArrayList<Contact>();
 
     try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, id);
+      var stm = database.getConnection().prepareStatement("SELECT * from contacts");
       var rs = stm.executeQuery();
-      if (rs.next()) {
+      while (rs.next()) {
         var user = new User();
         user.setId(rs.getInt("user_id"));
 
-        return new Contact(
+        contacts.add(
+          new Contact(
             rs.getInt("id"),
             user,
             rs.getString("name"),
             rs.getString("cpf"),
             rs.getString("bank_code"),
             rs.getString("bank_agency"),
-            rs.getString("bank_account"));
+            rs.getString("bank_account")
+          ));
       }
     } catch (SQLException e) {
-      // TODO improve it
       e.printStackTrace();
     }
-    return null;
+    return contacts;
+  }
+
+  @Override
+  public Contact get(int id) {
+    return getContacts().stream().filter((Contact c) -> c.getId() == id).findFirst().get();
   }
 
   @Override
   public List<Contact> getAll(int userId) {
-    var query = "SELECT * from contacts";
-    var result = new ArrayList<Contact>();
-
-    try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, userId);
-      var rs = stm.executeQuery();
-      while (rs.next()) {
-        var user = new User();
-        user.setId(rs.getInt("user_id"));
-
-        result.add(
-            new Contact(
-                rs.getInt("id"),
-                user,
-                rs.getString("name"),
-                rs.getString("cpf"),
-                rs.getString("bank_code"),
-                rs.getString("bank_agency"),
-                rs.getString("bank_account")));
-      }
-    } catch (SQLException e) {
-      // TODO improve it
-      e.printStackTrace();
-    }
-    return result;
+    return getContacts().stream().filter((Contact c) -> c.getUser().getId() == userId).collect(Collectors.toList());
   }
 
   private PreparedStatement setContactRow(String query, Contact c) throws Exception {

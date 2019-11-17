@@ -14,58 +14,34 @@ public class UserDAO implements IUserDAO {
     this.database = database;
   }
 
-  @Override
-  public User get(int id) {
-    var query = "SELECT * from users";
-
+  // Method created to work with streams instead of query filter
+  private List<User> getUsers() {
+    var users = new ArrayList<User>();
     try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, id);
+      var stm = database.getConnection().prepareStatement("SELECT * from users");
       var rs = stm.executeQuery();
-      if (rs.next()) {
-        return new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"));
+      while (rs.next()) {
+        users.add(new User(rs.getInt("id"), rs.getString("login"), rs.getString("password")));
       }
     } catch (SQLException e) {
-      // TODO improve it
       e.printStackTrace();
     }
-    return null;
+    return users;
+  }
+
+  @Override
+  public User get(int id) {
+    return getUsers().stream().filter((User u) -> u.getId() == id).findFirst().get();
   }
 
   @Override
   public User get(String login) {
-    var query = "SELECT * from users";
-
-    try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setString(1, login);
-      var rs = stm.executeQuery();
-      if (rs.next()) {
-        return new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"));
-      }
-    } catch (SQLException e) {
-      // TODO improve it
-      e.printStackTrace();
-    }
-    return null;
+    return getUsers().stream().filter((User u) -> u.getLogin().equals(login)).findFirst().get();
   }
 
   @Override
   public List<User> getAll() {
-    var query = "SELECT * from users";
-    var result = new ArrayList<User>();
-
-    try {
-      var stm = database.getConnection().prepareStatement(query);
-      var rs = stm.executeQuery();
-      while (rs.next()) {
-        result.add(new User(rs.getInt("id"), rs.getString("login"), rs.getString("password")));
-      }
-    } catch (SQLException e) {
-      // TODO improve it
-      e.printStackTrace();
-    }
-    return result;
+    return getUsers();
   }
 
   @Override

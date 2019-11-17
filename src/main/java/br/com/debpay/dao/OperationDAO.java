@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OperationDAO implements IOperationDAO {
   private static final SimpleDateFormat sdt = new SimpleDateFormat("yyyy-MM-dd");
@@ -21,49 +22,12 @@ public class OperationDAO implements IOperationDAO {
     this.database = database;
   }
 
-  @Override
-  public Operation get(int id) {
-    var query = "SELECT * from operations";
+  // Method created to work with streams instead of query filter
+  private List<Operation> getOperations() {
+    var operations = new ArrayList<Operation>();
 
     try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, id);
-      var rs = stm.executeQuery();
-      if (rs.next()) {
-        var user = new User();
-        user.setId(rs.getInt("user_id"));
-
-        var contact = new Contact();
-        contact.setId(rs.getInt("contact_id"));
-        contact.setUser(user);
-
-        return new Operation(
-            rs.getInt("id"),
-            rs.getString("description"),
-            OperationType.valueOf(rs.getInt("type")),
-            sdt.parse(rs.getString("due_date")),
-            rs.getInt("installments_left"),
-            rs.getFloat("value"),
-            contact);
-      }
-    } catch (Exception e) {
-      // TODO improve it
-      e.printStackTrace();
-    }
-    return null;
-  }
-
-  @Override
-  public List<Operation> getAll(int userId, Date date) {
-    var query = "SELECT * from operations";
-    var result = new ArrayList<Operation>();
-
-    if (date != null) query += " AND due_date = ?";
-
-    try {
-      var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, userId);
-      if (date != null) stm.setString(2, sdt.format(date));
+      var stm = database.getConnection().prepareStatement("SELECT * from operations");
       var rs = stm.executeQuery();
       while (rs.next()) {
         var user = new User();
@@ -73,8 +37,7 @@ public class OperationDAO implements IOperationDAO {
         contact.setId(rs.getInt("contact_id"));
         contact.setUser(user);
 
-        result.add(
-            new Operation(
+        operations.add(new Operation(
                 rs.getInt("id"),
                 rs.getString("description"),
                 OperationType.valueOf(rs.getInt("type")),
@@ -84,10 +47,26 @@ public class OperationDAO implements IOperationDAO {
                 contact));
       }
     } catch (Exception e) {
-      // TODO improve it
       e.printStackTrace();
     }
-    return result;
+    return operations;
+  }
+
+  @Override
+  public Operation get(int id) {
+    return getOperations().stream().filter((Operation op) -> op.getId() == id).findFirst().get();
+  }
+
+  @Override
+  public List<Operation> getAll(int userId, Date date) {
+    List<Operation> operations = getOperations().stream().
+            filter((Operation op) -> op.getId() == userId).collect(Collectors.toList());
+
+    if(date != null)
+      operations = operations.stream().
+              filter((Operation op) -> op.getDueDate().compareTo(date) == 0).collect(Collectors.toList());
+
+    return operations;
   }
 
   private PreparedStatement setOperationRow(String query, Operation o) throws Exception {
