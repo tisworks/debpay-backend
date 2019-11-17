@@ -23,7 +23,7 @@ public class OperationDAO implements IOperationDAO {
 
   @Override
   public Operation get(int id) {
-    var query = "SELECT * from operations WHERE id = ?";
+    var query = "SELECT * from operations";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
@@ -55,7 +55,7 @@ public class OperationDAO implements IOperationDAO {
 
   @Override
   public List<Operation> getAll(int userId, Date date) {
-    var query = "SELECT * from operations WHERE user_id = ?";
+    var query = "SELECT * from operations";
     var result = new ArrayList<Operation>();
 
     if (date != null) query += " AND due_date = ?";

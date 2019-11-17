@@ -18,7 +18,7 @@ public class ContactDAO implements IContactDAO {
 
   @Override
   public Contact get(int id) {
-    var query = "SELECT * from contacts WHERE id = ?";
+    var query = "SELECT * from contacts";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
@@ -46,7 +46,7 @@ public class ContactDAO implements IContactDAO {
 
   @Override
   public List<Contact> getAll(int userId) {
-    var query = "SELECT * from contacts WHERE user_id = ?";
+    var query = "SELECT * from contacts";
     var result = new ArrayList<Contact>();
 
     try {

@@ -16,7 +16,7 @@ public class UserDAO implements IUserDAO {
 
   @Override
   public User get(int id) {
-    var query = "SELECT * from users WHERE id = ?";
+    var query = "SELECT * from users";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
@@ -34,7 +34,7 @@ public class UserDAO implements IUserDAO {
 
   @Override
   public User get(String login) {
-    var query = "SELECT * from users WHERE login = ?";
+    var query = "SELECT * from users";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
