@@ -40,7 +40,6 @@ public class Main {
    * @throws IOException
    */
   public static void main(String[] args) throws IOException {
-    Container.setDataBasePath(args[0]);
     final HttpServer server = startServer();
     System.in.read();
     server.stop();
