@@ -19,10 +19,10 @@ public class UserController {
     // TODO we should validate the parameters
     var user = new Gson().fromJson(JSONInput, JSONInput.User.class);
     var service = Container.getUserService();
-    var id = service.login(user.login, user.password);
+    var userDto = service.login(user.login, user.password);
 
-    if (id != 0) {
-      return Response.status(Response.Status.OK).entity(id).build();
+    if (userDto != null) {
+      return Response.status(Response.Status.OK).entity(userDto).build();
     }
 
     return Response.status(Response.Status.UNAUTHORIZED).build();
@@ -34,8 +34,8 @@ public class UserController {
     // TODO we should validate the parameters
     var user = new Gson().fromJson(JSONInput, JSONInput.User.class);
     var service = Container.getUserService();
-    var id = service.createUser(user.login, user.password);
+    var userDTO = service.createUser(user.login, user.password, user.name);
 
-    return Response.status(Response.Status.OK).entity(id).build();
+    return Response.status(Response.Status.OK).entity(userDTO).build();
   }
 }

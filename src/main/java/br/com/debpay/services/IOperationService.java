@@ -9,4 +9,6 @@ public interface IOperationService {
   void createOperation(OperationDTO dto);
 
   List<OperationDTO> listOperations(OperationFilterDTO dto);
+
+  void deleteOperation(int operationID);
 }

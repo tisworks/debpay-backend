@@ -18,7 +18,7 @@ public class ContactDAO implements IContactDAO {
 
   @Override
   public Contact get(int id) {
-    var query = "SELECT * from contacts WHERE id = ?";
+    var query = "SELECT * from contacts WHERE id = ? AND disabled = 0";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
@@ -46,7 +46,7 @@ public class ContactDAO implements IContactDAO {
 
   @Override
   public List<Contact> getAll(int userId) {
-    var query = "SELECT * from contacts WHERE user_id = ?";
+    var query = "SELECT * from contacts WHERE user_id = ? AND disabled = 0";
     var result = new ArrayList<Contact>();
 
     try {
@@ -88,8 +88,8 @@ public class ContactDAO implements IContactDAO {
   @Override
   public void save(Contact c) {
     var query =
-        "INSERT INTO contacts (user_id, name, cpf, bank_code, bank_agency, bank_account) "
-            + "VALUES (?, ?, ?, ?, ?, ?)";
+        "INSERT INTO contacts (user_id, name, cpf, bank_code, bank_agency, bank_account, disabled) "
+            + "VALUES (?, ?, ?, ?, ?, ?, 0)";
 
     try {
       var stm = setContactRow(query, c);
@@ -118,12 +118,11 @@ public class ContactDAO implements IContactDAO {
 
   @Override
   public void delete(int id) {
-    var query = "UPDATE contacts SET disabled = ? WHERE id = ?";
+    var query = "UPDATE contacts SET disabled = 1 WHERE id = ?";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
-      stm.setBoolean(1, true);
-      stm.setInt(2, id);
+      stm.setInt(1, id);
       stm.executeUpdate();
     } catch (SQLException e) {
       // TODO improve it

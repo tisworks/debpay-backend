@@ -49,6 +49,11 @@ public class OperationService implements IOperationService {
     return returnList;
   }
 
+  @Override
+  public void deleteOperation(int operationID) {
+    dao.delete(operationID);
+  }
+
   private OperationDTO operationToDTO(Operation op) {
     var dto = new OperationDTO();
     dto.setId(op.getId());

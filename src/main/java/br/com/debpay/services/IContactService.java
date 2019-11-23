@@ -5,7 +5,10 @@ import br.com.debpay.dto.ContactDTO;
 import java.util.List;
 
 public interface IContactService {
+
   void createContact(ContactDTO dto);
 
   List<ContactDTO> listContact(int userID);
+
+  void deleteContact(int userID);
 }

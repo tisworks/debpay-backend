@@ -82,4 +82,20 @@ public class OperationsController {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
   }
+
+  @DELETE
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response deleteOperation(@QueryParam("id") int operationID) {
+    try {
+      if (operationID < 1) {
+        return Response.status(Response.Status.BAD_REQUEST).build();
+      }
+
+      var service = Container.getOperationService();
+      service.deleteOperation(operationID);
+      return Response.status(Response.Status.OK).build();
+    } catch (Exception ex) {
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+  }
 }

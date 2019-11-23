@@ -60,6 +60,22 @@ public class ContactController {
     }
   }
 
+  @DELETE
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response deleteContact(@QueryParam("id") int userID) {
+    try {
+      if (userID < 1) {
+        return Response.status(Response.Status.BAD_REQUEST).build();
+      }
+
+      var service = Container.getContactService();
+      service.deleteContact(userID);
+      return Response.status(Response.Status.OK).build();
+    } catch (Exception ex) {
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+  }
+
   private static class ContactInput {
     int userID;
     String name;

@@ -44,6 +44,11 @@ public class ContactService implements IContactService {
     return result;
   }
 
+  @Override
+  public void deleteContact(int userID) {
+    dao.delete(userID);
+  }
+
   private ContactDTO contactToDTO(Contact c) {
     var dto = new ContactDTO();
     dto.setId(c.getId());

@@ -23,7 +23,8 @@ public class UserDAO implements IUserDAO {
       stm.setInt(1, id);
       var rs = stm.executeQuery();
       if (rs.next()) {
-        return new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"));
+        return new User(rs.getInt("id"), rs.getString("login"),
+                rs.getString("password"), rs.getString("name"));
       }
     } catch (SQLException e) {
       // TODO improve it
@@ -41,7 +42,8 @@ public class UserDAO implements IUserDAO {
       stm.setString(1, login);
       var rs = stm.executeQuery();
       if (rs.next()) {
-        return new User(rs.getInt("id"), rs.getString("login"), rs.getString("password"));
+        return new User(rs.getInt("id"), rs.getString("login"),
+                rs.getString("password"), rs.getString("name"));
       }
     } catch (SQLException e) {
       // TODO improve it
@@ -59,7 +61,8 @@ public class UserDAO implements IUserDAO {
       var stm = database.getConnection().prepareStatement(query);
       var rs = stm.executeQuery();
       while (rs.next()) {
-        result.add(new User(rs.getInt("id"), rs.getString("login"), rs.getString("password")));
+        result.add(new User(rs.getInt("id"), rs.getString("login"),
+                rs.getString("password"), rs.getString("name")));
       }
     } catch (SQLException e) {
       // TODO improve it
@@ -70,12 +73,13 @@ public class UserDAO implements IUserDAO {
 
   @Override
   public void save(User u) {
-    var query = "INSERT INTO users (login, password) VALUES (?, ?)";
+    var query = "INSERT INTO users (login, password, name) VALUES (?, ?, ?)";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
       stm.setString(1, u.getLogin());
       stm.setString(2, u.getPassword());
+      stm.setString(3, u.getName());
       stm.executeUpdate();
     } catch (SQLException e) {
       // TODO improve it
@@ -85,13 +89,14 @@ public class UserDAO implements IUserDAO {
 
   @Override
   public void update(User u) {
-    var query = "UPDATE users SET login = ?, password = ? WHERE id = ?";
+    var query = "UPDATE users SET login = ?, password = ?, name = ? WHERE id = ?";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
       stm.setString(1, u.getLogin());
       stm.setString(2, u.getPassword());
-      stm.setInt(3, u.getId());
+      stm.setString(3, u.getName());
+      stm.setInt(4, u.getId());
       stm.executeUpdate();
     } catch (SQLException e) {
       // TODO improve it

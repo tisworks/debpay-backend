@@ -5,15 +5,7 @@ import br.com.debpay.entities.User;
 public class UserDTO {
   private int id;
   private String login;
-  private String password;
-
-  public static UserDTO converter(User user) {
-    var dto = new UserDTO();
-    dto.id = user.getId();
-    dto.login = user.getLogin();
-    dto.password = user.getPassword();
-    return dto;
-  }
+  private String name;
 
   public int getId() {
     return id;
@@ -31,11 +23,11 @@ public class UserDTO {
     this.login = login;
   }
 
-  public String getPassword() {
-    return password;
+  public String getName() {
+    return name;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
+  public void setName(String name) {
+    this.name = name;
   }
 }

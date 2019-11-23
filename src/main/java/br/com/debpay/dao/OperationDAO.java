@@ -23,7 +23,7 @@ public class OperationDAO implements IOperationDAO {
 
   @Override
   public Operation get(int id) {
-    var query = "SELECT * from operations WHERE id = ?";
+    var query = "SELECT * from operations WHERE id = ? AND disabled = 0";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
@@ -55,7 +55,7 @@ public class OperationDAO implements IOperationDAO {
 
   @Override
   public List<Operation> getAll(int userId, Date date) {
-    var query = "SELECT * from operations WHERE user_id = ?";
+    var query = "SELECT * from operations WHERE user_id = ? AND disabled = 0";
     var result = new ArrayList<Operation>();
 
     if (date != null) query += " AND due_date = ?";
@@ -105,8 +105,8 @@ public class OperationDAO implements IOperationDAO {
   @Override
   public void save(Operation o) {
     var query =
-        "INSERT INTO operations (description, type, due_date, installments_left, value, contact_id, user_id)"
-            + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        "INSERT INTO operations (description, type, due_date, installments_left, value, contact_id, user_id, disabled)"
+            + " VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
 
     try {
       var stm = setOperationRow(query, o);
@@ -135,12 +135,11 @@ public class OperationDAO implements IOperationDAO {
 
   @Override
   public void delete(int id) {
-    var query = "UPDATE operations SET disabled = ? WHERE id = ?";
+    var query = "UPDATE operations SET disabled = 1 WHERE id = ?";
 
     try {
       var stm = database.getConnection().prepareStatement(query);
-      stm.setBoolean(1, true);
-      stm.setInt(2, id);
+      stm.setInt(1, id);
       stm.executeUpdate();
     } catch (SQLException e) {
       // TODO improve it

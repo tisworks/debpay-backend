@@ -6,6 +6,7 @@ class JSONInput {
   static class User {
     String login;
     String password;
+    String name;
   }
 
   static class Operation {
