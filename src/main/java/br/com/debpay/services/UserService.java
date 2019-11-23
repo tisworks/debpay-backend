@@ -1,6 +1,7 @@
 package br.com.debpay.services;
 
 import br.com.debpay.dao.IUserDAO;
+import br.com.debpay.dto.UserDTO;
 import br.com.debpay.entities.User;
 import br.com.debpay.util.MD5;
 
@@ -14,17 +15,21 @@ public class UserService implements IUserService {
   }
 
   @Override
-  public int login(String login, String password) {
+  public UserDTO login(String login, String password) {
     var user = dao.get(login);
     if (user != null && user.getPassword().equals(MD5.hash(password, salt))) {
-      return user.getId();
+      var dto = new UserDTO();
+      dto.setId(user.getId());
+      dto.setLogin(user.getLogin());
+      dto.setName(user.getName());
+      return dto;
     }
-    return 0;
+    return null;
   }
 
   @Override
-  public int createUser(String login, String password) {
-    dao.save(new User(login, MD5.hash(password, this.salt)));
+  public UserDTO createUser(String login, String password, String name) {
+    dao.save(new User(login, MD5.hash(password, this.salt), name));
     return login(login, password);
   }
 }
