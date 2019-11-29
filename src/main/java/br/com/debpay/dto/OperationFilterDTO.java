@@ -5,6 +5,15 @@ import java.util.Date;
 public class OperationFilterDTO {
   private int userID;
   private Date dueDate;
+  private int contactID;
+
+  public int getContactID() {
+    return contactID;
+  }
+
+  public void setContactID(int contactID) {
+    this.contactID = contactID;
+  }
 
   public int getUserID() {
     return userID;

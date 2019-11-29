@@ -54,16 +54,27 @@ public class OperationDAO implements IOperationDAO {
   }
 
   @Override
-  public List<Operation> getAll(int userId, Date date) {
+  public List<Operation> getAll(int userId, Date date, int contactID) {
     var query = "SELECT * from operations WHERE user_id = ? AND disabled = 0";
     var result = new ArrayList<Operation>();
 
     if (date != null) query += " AND due_date = ?";
 
+    if (contactID != 0) query += " AND contact_id = ?";
+
     try {
+      var argCount = 1;
+
       var stm = database.getConnection().prepareStatement(query);
-      stm.setInt(1, userId);
-      if (date != null) stm.setString(2, sdt.format(date));
+      stm.setInt(argCount, userId);
+      if (date != null) {
+        argCount++;
+        stm.setString(argCount, sdt.format(date));
+      }
+      if (contactID != 0) {
+        argCount++;
+        stm.setInt(argCount, contactID);
+      }
       var rs = stm.executeQuery();
       while (rs.next()) {
         var user = new User();

@@ -57,7 +57,7 @@ public class OperationsController {
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response listOperation(
-      @QueryParam("userID") int userID, @QueryParam("due_date") String dueDate) {
+      @QueryParam("userID") int userID, @QueryParam("due_date") String dueDate, @QueryParam("contactID") int contactID) {
     try {
       var filter = new OperationFilterDTO();
 
@@ -74,6 +74,12 @@ public class OperationsController {
           return Response.status(Response.Status.BAD_REQUEST).build();
         }
       }
+
+      if (contactID != 0 && contactID < 1) {
+        return Response.status(Response.Status.BAD_REQUEST).build();
+      }
+
+      filter.setContactID(contactID);
 
       var service = Container.getOperationService();
       var result = service.listOperations(filter);

@@ -8,7 +8,7 @@ import java.util.List;
 public interface IOperationDAO {
   Operation get(int id);
 
-  List<Operation> getAll(int userId, Date date);
+  List<Operation> getAll(int userId, Date date, int contactID);
 
   void save(Operation o);
 
