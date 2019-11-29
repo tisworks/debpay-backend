@@ -77,7 +77,9 @@ public class OperationsController {
 
       var service = Container.getOperationService();
       var result = service.listOperations(filter);
-      return Response.status(Response.Status.OK).entity(result).build();
+
+      var gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+      return Response.status(Response.Status.OK).entity(gson.toJson(result)).build();
     } catch (Exception ex) {
       return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
     }
